@@ -189,5 +189,6 @@ app.get('/serviceowner/showallbookings', function(req, res){
     //res.send('hi');
 });
 
+let port = process.env.PORT ||8000
 
-app.listen(8000);
+app.listen(port);
