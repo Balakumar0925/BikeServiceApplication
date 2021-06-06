@@ -5,8 +5,12 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"node app.js\" \"npm start --prefix frontend/bike-reactjs\"",
-    "heroku-postbuild": "cd frontend/bike-reactjs && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "build:app": "cd client && npm build",
+    "install": "npm build && npm run-script build:app",
+    "server": "node app.js",
+    "start": "concurrently  \"npm run-script server\" \"npm run-script install\"",
+    "postinstall": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run-script build && npm start",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run-script build && npm start"
   },
   "author": "",
   "license": "ISC",
