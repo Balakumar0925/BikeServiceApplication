@@ -195,8 +195,9 @@ app.get('/helloworld', function(req, res) {
     });
 })
 
-let port = process.env.PORT ||5000
+global.__port = process.env.PORT ||5000
+console.log(__port);
 
-app.listen(port, function(){
-    console.log('Express server running on port'+port);
+app.listen(__port, function(){
+    console.log('Express server running on port'+__port);
 });
