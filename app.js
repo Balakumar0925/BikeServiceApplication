@@ -195,8 +195,8 @@ app.get('/helloworld', function(req, res) {
     });
 })
 
-global.__port = process.env.PORT ||5000
-console.log(__port);
+let port = process.env.PORT ||5000
+console.log(port);
 
 if (process.env.NODE_ENV === 'production') {
     console.log('coming to react log');
@@ -209,6 +209,6 @@ if (process.env.NODE_ENV === 'production') {
     });
   }
 
-app.listen(__port, function(){
+app.listen(port, function(){
     console.log('Express server running on port'+__port);
 });
