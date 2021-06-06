@@ -189,6 +189,14 @@ app.get('/serviceowner/showallbookings', function(req, res){
     //res.send('hi');
 });
 
+app.get('/helloworld', function(req, res) {
+    res.json({
+        'name': 'shankar'
+    });
+})
+
 let port = process.env.PORT ||5000
 
-app.listen(port);
+app.listen(port, function(){
+    console.log('Express server running on port'+port);
+});
