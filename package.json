@@ -5,13 +5,6 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:client": "cd frontend/bike-reactjs/ && npm install && npm run build",
-    "build:server": "npm install",
-    "start:client": "npm start --prefix frontend/bike-reactjs",
-    "start:server": "node app.js",
-    "start:both": "concurrently \"node app.js\" \"npm start --prefix frontend/bike-reactjs\"",
-    "server": "npm install && node app.js",
-    "client": "npm run-script build && npm start --prefix frontend/bike-reactjs",
     "start": "concurrently \"node app.js\" \"npm start --prefix frontend/bike-reactjs\"",
     "heroku-postbuild": "cd frontend/bike-reactjs && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
