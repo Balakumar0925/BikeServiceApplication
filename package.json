@@ -9,6 +9,7 @@
     "dev:app": "cd client && npm start",
     "build:app": "cd client && npm build",
     "start": "node app.js",
+    "postinstall": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "author": "",

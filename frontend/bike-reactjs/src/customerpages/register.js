@@ -7,13 +7,14 @@ class LoginForm extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            name:props.name,
-            email:props.email,
-            phoneNumber:props.phoneNumber,
+            name:"",
+            email:"",
+            phoneNumber:"",
             responseBody:''
-        }
+        };
         this.Loginpage= this.Loginpage.bind(this);
         this.onChange = this.onChange.bind(this);
+        
     }
 
     /*handleTextChange(e){
@@ -22,12 +23,13 @@ class LoginForm extends React.Component{
            name: e.target.value
          }));
        }*/
-
+    
+       
        onChange(e){
            if(e.target.id =='name' ) {
               // console.log('we r coming here')
-            this.setState({
-                ...this.state, 
+            this.setState({ 
+                ...this.state,
                 'name': e.target.value
             });
            } 
@@ -38,9 +40,12 @@ class LoginForm extends React.Component{
                    ...this.state,
                    'email': e.target.value
                });
+               
            }
 
            if(e.target.id == 'phoneNumber') {
+            
+               
                this.setState({
                    ...this.state,
                    'phoneNumber': e.target.value
@@ -48,26 +53,42 @@ class LoginForm extends React.Component{
            }
            
        }
-
-
-
        async Loginpage(){ 
-           let abody = {
+
+            var re = new RegExp(/^[6-9]\d{9}/);
+            var phonvalid = re.test(this.state.phoneNumber);
+            let mail = new RegExp(/^[a-z0-9]\w+@[a-z]\w.[a-z]\w.+/);
+            let mailValid = mail.test(this.state.email);
+          
+           if(this.state.name.length < 1){
+               alert('You should fill the name field');
+           }
+            
+           else if (this.state.email.length < 1 || mailValid === false ){
+               alert('You should fill the email field');
+           }
+
+           else if (this.state.phoneNumber === "" || phonvalid === false ){
+               alert('You should provide a phone number of 10 digits');
+           }   
+           else{
+               let abody = {
                name : this.state.name,
                email: this.state.email,
                phoneNumber : this.state.phoneNumber
-           }
+           };
            let options = {
                url: "/customer/register",
                data: abody,
                method: 'POST'
-           }
+           };
            let dataRequest = await callBackend(options);
-           //console.log(dataRequest);
+           console.log("hii",dataRequest);
            this.setState({
                ...this.state,
                'responseBody': dataRequest
-           });     
+           }); 
+           }
        }
 
     render(){
@@ -85,7 +106,8 @@ class LoginForm extends React.Component{
                 </FormGroup>
                 <FormGroup>
                     <Form.Label>PHONENUMBER</Form.Label>
-                    <Form.Control id="phoneNumber" type="phonenumber" value={this.state.phoneNumber} onChange={this.onChange}></Form.Control>
+                    <Form.Control id="phoneNumber" type="phonenumber" 
+                value={this.state.phoneNumber} maxLength='10' onChange={this.onChange}></Form.Control>
                 </FormGroup>
                    
                 </Form>
